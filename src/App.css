@@ -36,9 +36,3 @@
     transform: rotate(360deg);
   }
 }
-
-/* Additional CSS */
-
-.list {
-  list-style-type: circle;
-}
