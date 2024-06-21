@@ -14,7 +14,7 @@ const { Header, Content, Footer } = Layout;
 const { Title, Text } = Typography;
 
 function App() {
-  // For Ant Design Components
+  // For Ant Design Theme
   const {
     token: { colorBgContainer, borderRadiusLG },
   } = theme.useToken();
@@ -35,9 +35,6 @@ function App() {
       };
       setTodoList([...todoList, task]);
       setNewTask("");
-      // console.log(
-      //   "New Todo List: " + [...todoList, task].map((task) => task.taskName)
-      // ); // to check
     }
   };
 
@@ -49,20 +46,11 @@ function App() {
       };
       setTodoList([...todoList, task]);
       setNewTask("");
-      // console.log(
-      //   "New Todo List: " + [...todoList, task].map((task) => task.taskName)
-      // ); // to check
     }
   };
 
   const deleteTask = (taskID) => {
     setTodoList(todoList.filter((task) => task.id !== taskID));
-    // console.log(
-    //   "New Todo List: " +
-    //     todoList
-    //       .filter((task) => task.id !== taskID)
-    //       .map((task) => task.taskName)
-    // ); // to check
   };
 
   return (
