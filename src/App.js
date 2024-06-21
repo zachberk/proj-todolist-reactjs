@@ -1,5 +1,6 @@
 import "./App.css";
 import { useState } from "react";
+import 'antd/dist/antd.css'; // or 'antd/dist/antd.less'
 
 function App() {
   const [todoList, setTodoList] = useState([]);
@@ -33,6 +34,7 @@ function App() {
 
   return (
     <div className="App">
+      <div className="header">Header</div>
       <div className="addTask">
         <input
           value={newTask}
@@ -42,18 +44,21 @@ function App() {
         />
         <button onClick={addTask}> Add Task </button>
       </div>
-      <ul className="list">
-        {todoList.map((task) => {
-          return (
-            <li key={task.id}>
-              <div style={{ display: "flex" }}>
-                {task.taskName}
-                <button onClick={() => deleteTask(task.id)}> X </button>
-              </div>
-            </li>
-          );
-        })}
-      </ul>
+      <div className="list-wrapper">
+        <ul className="list">
+          {todoList.map((task) => {
+            return (
+              <li key={task.id}>
+                <div style={{ display: "flex" }}>
+                  {task.taskName}
+                  <button onClick={() => deleteTask(task.id)}> X </button>
+                </div>
+              </li>
+            );
+          })}
+        </ul>
+      </div>
+      <div className="footer">Footer</div>
     </div>
   );
 }
