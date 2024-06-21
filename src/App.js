@@ -10,15 +10,24 @@ function App() {
   };
 
   const addTask = () => {
-    setTodoList([...todoList, newTask]);
+    const task = {
+      id: todoList.length === 0 ? 1 : todoList[todoList.length - 1].id + 1,
+      taskName: newTask,
+    };
+    setTodoList([...todoList, task]);
     setNewTask("");
-    console.log("New Todo List: " + [...todoList, newTask]); // to check
+    console.log(
+      "New Todo List: " + [...todoList, task].map((task) => task.taskName)
+    ); // to check
   };
 
-  const deleteTask = (taskName) => {
-    setTodoList(todoList.filter((task) => task !== taskName));
+  const deleteTask = (taskID) => {
+    setTodoList(todoList.filter((task) => task.id !== taskID));
     console.log(
-      "New Todo List: " + todoList.filter((task) => task !== taskName)
+      "New Todo List: " +
+        todoList
+          .filter((task) => task.id !== taskID)
+          .map((task) => task.taskName)
     ); // to check
   };
 
@@ -34,12 +43,12 @@ function App() {
         <button onClick={addTask}> Add Task </button>
       </div>
       <ul className="list">
-        {todoList.map((task, index) => {
+        {todoList.map((task) => {
           return (
-            <li key={task + index}>
+            <li key={task.id}>
               <div style={{ display: "flex" }}>
-                {task}
-                <button onClick={() => deleteTask(task)}> X </button>
+                {task.taskName}
+                <button onClick={() => deleteTask(task.id)}> X </button>
               </div>
             </li>
           );
