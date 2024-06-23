@@ -96,12 +96,11 @@ function App() {
           <List>
             {todoList.map((task) => {
               return (
-                <List.Item key={task.id}>
-                  <Task
-                    taskName={task.taskName}
-                    onDelete={() => deleteTask(task.id)}
-                  />
-                </List.Item>
+                <Task
+                  taskID={task.id}
+                  taskName={task.taskName}
+                  onDelete={() => deleteTask(task.id)}
+                />
               );
             })}
           </List>

@@ -1,15 +1,18 @@
 import React from "react";
-import { Typography, Button, Flex } from "antd";
+import { List, Typography, Button, Flex } from "antd";
 const { Text } = Typography;
+const { Item } = List;
 
-const Task = ({ taskName, onDelete }) => {
+const Task = (props) => {
   return (
-    <Flex gap="middle" align="center">
-      <Text>{taskName}</Text>
-      <Button danger onClick={onDelete}>
-        X
-      </Button>
-    </Flex>
+    <Item key={props.taskID}>
+      <Flex gap="middle" align="center">
+        <Text>{props.taskName}</Text>
+        <Button danger onClick={props.onDelete}>
+          X
+        </Button>
+      </Flex>
+    </Item>
   );
 };
 
