@@ -23,6 +23,7 @@ function App() {
   // For Todo List Functionality
   const [todoList, setTodoList] = useState([]);
   const [newTask, setNewTask] = useState("");
+  // const [checkedTaskList, setCheckedTaskList] = useState([]);
 
   const handleInput = (event) => {
     setNewTask(event.target.value);
@@ -30,29 +31,35 @@ function App() {
 
   const handleAddTask = (event) => {
     if (newTask !== "") {
-      const task = addTask();
+      const task = returnTask();
       setTodoList([...todoList, task]);
       setNewTask("");
     }
   };
 
-  const handleKeyDown = (event) => {
+  const handleEnter = (event) => {
     if (event.key === "Enter" && newTask !== "") {
-      const task = addTask();
+      const task = returnTask();
       setTodoList([...todoList, task]);
       setNewTask("");
     }
   };
 
-  const addTask = () => {
+  const returnTask = () => {
     return {
       id: todoList.length === 0 ? 1 : todoList[todoList.length - 1].id + 1,
       taskName: newTask,
+      checked: false,
     };
   };
   const deleteTask = (taskID) => {
     setTodoList(todoList.filter((task) => task.id !== taskID));
   };
+  // const crossTask = (taskID) => {
+  //   deleteTask(taskID);
+  //   const task =
+  //   setCheckedTaskList([...checkedTaskList, task]);
+  // }
 
   return (
     <Layout>
@@ -85,7 +92,7 @@ function App() {
             <Input
               value={newTask}
               onChange={handleInput}
-              onKeyDown={handleKeyDown}
+              onKeyDown={handleEnter}
               type="text"
               placeholder="Enter a new task here..."
             />
@@ -99,6 +106,7 @@ function App() {
                 <Task
                   taskID={task.id}
                   taskName={task.taskName}
+                  checked={task.checked}
                   deleteTask={deleteTask}
                 />
               );
