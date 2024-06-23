@@ -99,7 +99,7 @@ function App() {
                 <Task
                   taskID={task.id}
                   taskName={task.taskName}
-                  onDelete={() => deleteTask(task.id)}
+                  deleteTask={deleteTask}
                 />
               );
             })}

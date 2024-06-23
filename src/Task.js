@@ -8,7 +8,7 @@ const Task = (props) => {
     <Item key={props.taskID}>
       <Flex gap="middle" align="center">
         <Text>{props.taskName}</Text>
-        <Button danger onClick={props.onDelete}>
+        <Button danger onClick={() => props.deleteTask(props.taskID)}>
           X
         </Button>
       </Flex>
