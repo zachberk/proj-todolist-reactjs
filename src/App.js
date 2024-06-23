@@ -1,5 +1,6 @@
 import "./App.css";
 import { useState } from "react";
+import Task from "./Task.js";
 import {
   Breadcrumb,
   Layout,
@@ -11,7 +12,7 @@ import {
   Flex,
 } from "antd";
 const { Header, Content, Footer } = Layout;
-const { Title, Text } = Typography;
+const { Title } = Typography;
 
 function App() {
   // For Ant Design Theme
@@ -48,7 +49,7 @@ function App() {
       id: todoList.length === 0 ? 1 : todoList[todoList.length - 1].id + 1,
       taskName: newTask,
     };
-  }
+  };
   const deleteTask = (taskID) => {
     setTodoList(todoList.filter((task) => task.id !== taskID));
   };
@@ -96,12 +97,10 @@ function App() {
             {todoList.map((task) => {
               return (
                 <List.Item key={task.id}>
-                  <Flex gap="middle" align="center">
-                    <Text>{task.taskName}</Text>
-                    <Button danger onClick={() => deleteTask(task.id)}>
-                      X
-                    </Button>
-                  </Flex>
+                  <Task
+                    taskName={task.taskName}
+                    onDelete={() => deleteTask(task.id)}
+                  />
                 </List.Item>
               );
             })}
