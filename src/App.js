@@ -27,12 +27,9 @@ function App() {
     setNewTask(event.target.value);
   };
 
-  const addTask = (event) => {
+  const handleAddTask = (event) => {
     if (newTask !== "") {
-      const task = {
-        id: todoList.length === 0 ? 1 : todoList[todoList.length - 1].id + 1,
-        taskName: newTask,
-      };
+      const task = addTask();
       setTodoList([...todoList, task]);
       setNewTask("");
     }
@@ -40,15 +37,18 @@ function App() {
 
   const handleKeyDown = (event) => {
     if (event.key === "Enter" && newTask !== "") {
-      const task = {
-        id: todoList.length === 0 ? 1 : todoList[todoList.length - 1].id + 1,
-        taskName: newTask,
-      };
+      const task = addTask();
       setTodoList([...todoList, task]);
       setNewTask("");
     }
   };
 
+  const addTask = () => {
+    return {
+      id: todoList.length === 0 ? 1 : todoList[todoList.length - 1].id + 1,
+      taskName: newTask,
+    };
+  }
   const deleteTask = (taskID) => {
     setTodoList(todoList.filter((task) => task.id !== taskID));
   };
@@ -80,7 +80,7 @@ function App() {
             borderRadius: borderRadiusLG,
           }}
         >
-          <Flex gap="middle" className="addTask">
+          <Flex gap="middle">
             <Input
               value={newTask}
               onChange={handleInput}
@@ -88,9 +88,8 @@ function App() {
               type="text"
               placeholder="Enter a new task here..."
             />
-            <Button type="primary" onClick={addTask}>
-              {" "}
-              Add Task{" "}
+            <Button type="primary" onClick={handleAddTask}>
+              Add Task
             </Button>
           </Flex>
           <List>
@@ -114,8 +113,7 @@ function App() {
           textAlign: "center",
         }}
       >
-        Components from Ant Design ©{new Date().getFullYear()}. Created by Ant
-        UED
+        Components from Ant Design ©{new Date().getFullYear()}.
       </Footer>
     </Layout>
   );
