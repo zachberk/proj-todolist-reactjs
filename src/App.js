@@ -66,7 +66,9 @@ function App() {
   };
 
   return (
-    <Layout style={{ minHeight: "100vh", display: "flex", flexDirection: "column" }}>
+    <Layout
+      style={{ minHeight: "100vh", display: "flex", flexDirection: "column" }}
+    >
       <Header style={{ flexShrink: 0 }}>
         <Title level={2} style={{ color: "white" }}>
           Todo List
@@ -75,7 +77,8 @@ function App() {
       <Content
         style={{
           padding: "0 48px",
-          flexGrow: 1 }}
+          flexGrow: 1,
+        }}
       >
         <Breadcrumb
           style={{
@@ -123,7 +126,7 @@ function App() {
       <Footer
         style={{
           textAlign: "center",
-          flexShrink: 0 
+          flexShrink: 0,
         }}
       >
         Components from Ant Design ©{new Date().getFullYear()}.
