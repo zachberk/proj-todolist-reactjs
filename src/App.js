@@ -23,26 +23,17 @@ function App() {
   // For Todo List Functionality
   const [todoList, setTodoList] = useState([]);
   const [newTask, setNewTask] = useState("");
-  // const [checkedTaskList, setCheckedTaskList] = useState([]);
 
   const handleInput = (event) => {
     setNewTask(event.target.value);
   };
 
-  const handleAddTask = (event) => {
-    if (newTask !== "") {
-      const task = returnTask();
-      setTodoList([...todoList, task]);
-      setNewTask("");
-    }
+  const handleAddTask = () => {
+    newTask !== "" && addTask();
   };
 
   const handleEnter = (event) => {
-    if (event.key === "Enter" && newTask !== "") {
-      const task = returnTask();
-      setTodoList([...todoList, task]);
-      setNewTask("");
-    }
+    event.key === "Enter" && newTask !== "" && addTask();
   };
 
   const returnTask = () => {
@@ -52,14 +43,27 @@ function App() {
       checked: false,
     };
   };
+
+  const addTask = () => {
+    const task = returnTask();
+    setTodoList([...todoList, task]);
+    setNewTask("");
+  };
+
   const deleteTask = (taskID) => {
     setTodoList(todoList.filter((task) => task.id !== taskID));
   };
-  // const crossTask = (taskID) => {
-  //   deleteTask(taskID);
-  //   const task =
-  //   setCheckedTaskList([...checkedTaskList, task]);
-  // }
+
+  const updateTaskCheckedStatus = (taskID, newCheckedStatus) => {
+    const updatedTodoList = todoList.map((task) => {
+      if (task.id === taskID) {
+        return { ...task, checked: newCheckedStatus };
+      } else {
+        return task;
+      }
+    });
+    setTodoList(updatedTodoList);
+  };
 
   return (
     <Layout>
@@ -104,10 +108,12 @@ function App() {
             {todoList.map((task) => {
               return (
                 <Task
+                  key={task.id}
                   taskID={task.id}
                   taskName={task.taskName}
                   checked={task.checked}
                   deleteTask={deleteTask}
+                  updateTaskCheckedStatus={updateTaskCheckedStatus}
                 />
               );
             })}
