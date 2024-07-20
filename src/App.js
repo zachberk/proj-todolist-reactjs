@@ -1,16 +1,8 @@
 import "./App.css";
 import { useState } from "react";
-import Task from "./Task.js";
-import {
-  Breadcrumb,
-  Layout,
-  theme,
-  List,
-  Typography,
-  Button,
-  Input,
-  Flex,
-} from "antd";
+import TodoList from "./TodoList.js";
+import InputField from "./InputField.js";
+import { Breadcrumb, Layout, theme, Typography } from "antd";
 const { Header, Content, Footer } = Layout;
 const { Title } = Typography;
 
@@ -38,7 +30,7 @@ function App() {
 
   const returnTask = () => {
     return {
-      id: todoList.length === 0 ? 1 : todoList[todoList.length - 1].id + 1,
+      id: todoList.length === 0 ? 1 : todoList.length + 1,
       taskName: newTask,
       checked: false,
     };
@@ -55,13 +47,9 @@ function App() {
   };
 
   const updateTaskCheckedStatus = (taskID, newCheckedStatus) => {
-    const updatedTodoList = todoList.map((task) => {
-      if (task.id === taskID) {
-        return { ...task, checked: newCheckedStatus };
-      } else {
-        return task;
-      }
-    });
+    const updatedTodoList = todoList.map((task) =>
+      task.id === taskID ? { ...task, checked: newCheckedStatus } : task
+    );
     setTodoList(updatedTodoList);
   };
 
@@ -95,32 +83,17 @@ function App() {
             borderRadius: borderRadiusLG,
           }}
         >
-          <Flex gap="middle">
-            <Input
-              value={newTask}
-              onChange={handleInput}
-              onKeyDown={handleEnter}
-              type="text"
-              placeholder="Enter a new task here..."
-            />
-            <Button type="primary" onClick={handleAddTask}>
-              Add Task
-            </Button>
-          </Flex>
-          <List>
-            {todoList.map((task) => {
-              return (
-                <Task
-                  key={task.id}
-                  taskID={task.id}
-                  taskName={task.taskName}
-                  checked={task.checked}
-                  deleteTask={deleteTask}
-                  updateTaskCheckedStatus={updateTaskCheckedStatus}
-                />
-              );
-            })}
-          </List>
+          <InputField
+            newTask={newTask}
+            handleInput={handleInput}
+            handleEnter={handleEnter}
+            handleAddTask={handleAddTask}
+          />
+          <TodoList
+            todoList={todoList}
+            deleteTask={deleteTask}
+            updateTaskCheckedStatus={updateTaskCheckedStatus}
+          />
         </div>
       </Content>
       <Footer
