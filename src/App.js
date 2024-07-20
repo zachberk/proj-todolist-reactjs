@@ -22,11 +22,15 @@ function App() {
   };
 
   const handleAddTask = () => {
-    newTask !== "" && addTask();
+    if (newTask.trim() !== "") {
+      addTask();
+    }
   };
 
   const handleEnter = (event) => {
-    event.key === "Enter" && newTask !== "" && addTask();
+    if (event.key === "Enter" && newTask !== "") {
+      addTask();
+    }
   };
 
   const returnTask = () => {
