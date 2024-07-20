@@ -1,5 +1,6 @@
 import "./App.css";
 import { useState } from "react";
+import { v4 as uuidv4 } from "uuid";
 import TodoList from "./TodoList.js";
 import InputField from "./InputField.js";
 import { Breadcrumb, Layout, theme, Typography } from "antd";
@@ -30,7 +31,7 @@ function App() {
 
   const returnTask = () => {
     return {
-      id: todoList.length === 0 ? 1 : todoList.length + 1,
+      id: uuidv4(),
       taskName: newTask,
       checked: false,
     };
